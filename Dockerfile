@@ -17,7 +17,7 @@ RUN \
 # install packages
  apt-get update && \
  apt-get install -y apt-transport-https && \
- dpkg -i /tmp/repo-MediaArea-1.0-2_all.deb && \
+ dpkg -i /tmp/repo-MediaArea-*.deb && \
  apt-get update && \
  apt-get install -y \
 	nzbdrone mediainfo && \
