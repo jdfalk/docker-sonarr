@@ -5,27 +5,33 @@ MAINTAINER sparklyballs
 ARG DEBIAN_FRONTEND="noninteractive"
 ENV XDG_CONFIG_HOME="/config/xdg"
 
-# add sonarr repository
+# add mediainfo repo
+
+# add sonarr repository
 RUN \
+ curl https://mediaarea.net/repo/deb/repo-mediaarea_1.0-2_all.deb -o /tmp/repo-mediaarea.deb && \
  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC && \
- echo "deb http://apt.sonarr.tv/ develop main" > \
+ echo "deb http://apt.sonarr.tv/ master main" > \
 	/etc/apt/sources.list.d/sonarr.list && \
 
 # install packages
  apt-get update && \
+ apt-get install -y apt-transport-https && \
+ dpkg -i /tmp/repo-mediaarea.deb && \
+ apt-get update && \
  apt-get install -y \
-	nzbdrone && \
+	nzbdrone mediainfo && \
 
-# cleanup
+# cleanup
  apt-get clean && \
  rm -rf \
 	/tmp/* \
 	/var/lib/apt/lists/* \
 	/var/tmp/*
 
-# add local files
+# add local files
 COPY root/ /
 
-# ports and volumes
+# ports and volumes
 EXPOSE 8989
 VOLUME /config /downloads /tv
