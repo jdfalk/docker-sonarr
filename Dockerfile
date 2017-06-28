@@ -5,6 +5,9 @@ MAINTAINER sparklyballs
 ARG DEBIAN_FRONTEND="noninteractive"
 ENV XDG_CONFIG_HOME="/config/xdg"
 
+# add mediainfo repo
+ADD . /tmp
+
 # add sonarr repository
 RUN \
  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC && \
@@ -13,8 +16,11 @@ RUN \
 
 # install packages
  apt-get update && \
+ apt-get install -y apt-transport-https && \
+ dpkg -i /tmp/repo-MediaArea-1.0-2_all.deb && \
+ apt-get update && \
  apt-get install -y \
-	nzbdrone && \
+	nzbdrone mediainfo && \
 
 # cleanup
  apt-get clean && \
