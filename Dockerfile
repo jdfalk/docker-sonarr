@@ -14,7 +14,7 @@ ENV XDG_CONFIG_HOME="/config/xdg"
 RUN \
  curl https://mediaarea.net/repo/deb/repo-mediaarea_1.0-2_all.deb -o /tmp/repo-mediaarea.deb && \
  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC && \
- echo "deb http://apt.sonarr.tv/ master main" > \
+ echo "deb http://apt.sonarr.tv/ develop main" > \
 	/etc/apt/sources.list.d/sonarr.list && \
 
 # install packages
