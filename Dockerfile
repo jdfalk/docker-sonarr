@@ -1,13 +1,16 @@
 FROM lsiobase/mono
-MAINTAINER sparklyballs
+MAINTAINER jdfalk
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="jf version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 
 # set environment variables
 ARG DEBIAN_FRONTEND="noninteractive"
 ENV XDG_CONFIG_HOME="/config/xdg"
 
-# add mediainfo repo
-
-# add sonarr repository
+# add mediainfo and sonarr repository
 RUN \
  curl https://mediaarea.net/repo/deb/repo-mediaarea_1.0-2_all.deb -o /tmp/repo-mediaarea.deb && \
  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC && \
