@@ -1,5 +1,10 @@
 FROM lsiobase/mono
-MAINTAINER sparklyballs
+MAINTAINER jdfalk
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="jf version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 
 # set environment variables
 ARG DEBIAN_FRONTEND="noninteractive"
