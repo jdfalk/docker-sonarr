@@ -1,11 +1,6 @@
 FROM lsiobase/mono
 MAINTAINER jdfalk
 
-# set version label
-ARG BUILD_DATE
-ARG VERSION
-LABEL build_version="jf version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-
 # set environment variables
 ARG DEBIAN_FRONTEND="noninteractive"
 ENV XDG_CONFIG_HOME="/config/xdg"
@@ -38,5 +33,7 @@ RUN \
 COPY root/ /
 
 # ports and volumes
-EXPOSE 8989
-VOLUME /config /downloads /tv
+EXPOSE 8080
+VOLUME /config
+
+HEALTHCHECK --interval=200s --timeout=100s CMD curl --fail http://localhost:8080 || exit 1
