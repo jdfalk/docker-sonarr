@@ -1,5 +1,10 @@
 FROM lsiobase/mono
-MAINTAINER jdfalk
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="jfalk"
 
 # set environment variables
 ARG BUILD_DATE
@@ -18,8 +23,7 @@ RUN \
  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC && \
  echo "deb http://apt.sonarr.tv/ develop main" > \
 	/etc/apt/sources.list.d/sonarr.list && \
-
-# install packages
+ echo "**** install packages ****" && \
  apt-get update && \
  apt-get install -y apt-transport-https && \
  dpkg -i /tmp/repo-mediaarea.deb && \
