@@ -3,19 +3,13 @@ FROM lsiobase/mono
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="jdfalk"
 
 # set environment variables
-ARG BUILD_DATE
 ARG DEBIAN_FRONTEND="noninteractive"
-ARG VCS_REF
 ENV XDG_CONFIG_HOME="/config/xdg"
 
 LABEL Name="Sonarr"
-LABEL org.label-schema.build-date=$BUILD_DATE \
-	org.label-schema.vcs-url="https://github.com/jdfalk/docker-sonarr.git" \
-	org.label-schema.vcs-ref=$VCS_REF
 
 # add mediainfo repo
 ADD . /tmp
@@ -29,7 +23,7 @@ RUN \
 	echo "**** install packages ****" && \
 	apt-get update && \
 	apt-get install -y apt-transport-https && \
-	dpkg -i /tmp/repo-MediaArea-*.deb && \
+	dpkg -i /tmp/repo-mediaarea.deb && \
 	apt-get update && \
 	apt-get install -y \
 	nzbdrone mediainfo && \

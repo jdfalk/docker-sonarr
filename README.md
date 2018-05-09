@@ -92,7 +92,10 @@ Monitor the logs of the container in realtime `docker logs -f sonarr`.
 
 ## Versions
 
+<<<<<<< HEAD
 + **15.12.17:** Fix continuation lines.
+=======
+>>>>>>> develop
 + **12.07.17:** Add inspect commands to README, move to jenkins build and push.
 + **17.04.17:** Switch to using inhouse mono baseimage, adds python also.
 + **14.04.17:** Change to mount /etc/localtime in README, thanks cbgj.
