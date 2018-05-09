@@ -6,15 +6,10 @@ ARG VERSION
 LABEL maintainer="jdfalk"
 
 # set environment variables
-ARG BUILD_DATE
 ARG DEBIAN_FRONTEND="noninteractive"
-ARG VCS_REF
 ENV XDG_CONFIG_HOME="/config/xdg"
 
 LABEL Name="Sonarr"
-LABEL org.label-schema.build-date=$BUILD_DATE \
-	org.label-schema.vcs-url="https://github.com/jdfalk/docker-sonarr.git" \
-	org.label-schema.vcs-ref=$VCS_REF
 
 # add mediainfo and sonarr repository
 RUN \
