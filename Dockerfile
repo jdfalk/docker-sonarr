@@ -27,7 +27,6 @@ RUN \
 	apt-get update && \
 	apt-get install -y \
 	nzbdrone mediainfo && \
-
 	# cleanup
 	apt-get clean && \
 	rm -rf \
