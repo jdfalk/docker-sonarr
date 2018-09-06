@@ -16,7 +16,7 @@ ADD . /tmp
 
 # add sonarr repository
 RUN \
-	curl https://mediaarea.net/repo/deb/repo-mediaarea_1.0-5_all.deb -o /tmp/repo-mediaarea.deb && \
+	curl https://mediaarea.net/repo/deb/repo-mediaarea_1.0-6_all.deb -o /tmp/repo-mediaarea.deb && \
 	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC && \
 	echo "deb http://apt.sonarr.tv/ develop main" > \
 	/etc/apt/sources.list.d/sonarr.list && \
