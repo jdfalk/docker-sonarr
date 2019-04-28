@@ -1,4 +1,4 @@
-FROM lsiobase/mono:xenial
+FROM lsiobase/mono:arm64v8-xenial
 
 # set version label
 ARG BUILD_DATE
@@ -12,40 +12,32 @@ ARG DEBIAN_FRONTEND="noninteractive"
 ENV XDG_CONFIG_HOME="/config/xdg"
 ENV SONARR_BRANCH="master"
 
-LABEL Name="Sonarr"
-
-# add mediainfo repo
-ADD . /tmp
-
-# add sonarr repository
 RUN \
-	echo "**** install packages ****" && \
-	apt-get update && \
-	apt-get install -y \
-	jq && \
-	echo "**** install sonarr ****" && \
-	mkdir -p /opt/NzbDrone && \
-	if [ -z ${SONARR_VERSION+x} ]; then \
+ echo "**** install packages ****" && \
+ apt-get update && \
+ apt-get install -y \
+        jq && \
+ echo "**** install sonarr ****" && \
+ mkdir -p /opt/NzbDrone && \
+  if [ -z ${SONARR_VERSION+x} ]; then \
 	SONARR_VERSION=$(curl -sX GET https://services.sonarr.tv/v1/download/${SONARR_BRANCH} \
 	| jq -r '.version'); \
-	fi && \
-	curl -o \
+ fi && \
+ curl -o \
 	/tmp/sonarr.tar.gz -L \
 	"https://download.sonarr.tv/v2/${SONARR_BRANCH}/mono/NzbDrone.${SONARR_BRANCH}.${SONARR_VERSION}.mono.tar.gz" && \
-	tar xf \
+ tar xf \
 	/tmp/sonarr.tar.gz -C \
 	/opt/NzbDrone --strip-components=1 && \
-	echo "**** cleanup ****" && \
-	apt-get clean && \
-	rm -rf \
+ echo "**** cleanup ****" && \
+ apt-get clean && \
+ rm -rf \
 	/tmp/* \
 	/var/tmp/*
 
-# add local files
+# add local files
 COPY root/ /
 
-# ports and volumes
-EXPOSE 8080
-VOLUME /config
-
-HEALTHCHECK --interval=200s --timeout=100s CMD curl --fail http://localhost:8080 || exit 1
+# ports and volumes
+EXPOSE 8989
+VOLUME /config /downloads /tv
